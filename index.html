@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ACASHOTS</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#f4f4f4;
+}
+
+header{
+display:flex;
+align-items:center;
+justify-content:space-between;
+background:#0f172a;
+color:white;
+padding:15px 30px;
+}
+
+.titulo{
+font-size:28px;
+font-weight:bold;
+}
+
+.logo{
+width:90px;
+border-radius:10px;
+}
+
+.menu-btn{
+font-size:28px;
+cursor:pointer;
+}
+
+.menu{
+position:fixed;
+left:-230px;
+top:0;
+width:230px;
+height:100%;
+background:#111827;
+transition:0.3s;
+padding-top:20px;
+}
+
+.menu.abierto{
+left:0;
+}
+
+.cerrar{
+color:white;
+font-size:25px;
+cursor:pointer;
+margin-left:180px;
+margin-bottom:20px;
+}
+
+.menu a{
+display:block;
+color:white;
+padding:15px;
+text-decoration:none;
+}
+
+.menu a:hover{
+background:#374151;
+}
+
+.contenido{
+display:flex;
+align-items:center;
+justify-content:space-around;
+padding:80px;
+flex-wrap:wrap;
+}
+
+.texto{
+max-width:400px;
+}
+
+.texto h1{
+font-size:40px;
+}
+
+.imagen{
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0px 5px 15px rgba(0,0,0,0.2);
+}
+
+.imagen img{
+width:300px;
+height:300px;
+object-fit:cover;
+border-radius:10px;
+}
+
+footer{
+background:#0f172a;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:100px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="menu" class="menu">
+
+<div class="cerrar" onclick="cerrarMenu()">✖</div>
+
+<a href="index.html">Inicio</a>
+<a href="UNIDADES/Login/LoginU.html">Unidades</a>
+<a href="#contacto">Contacto</a>
+
+</div>
+
+<header>
+
+<div class="menu-btn" onclick="abrirMenu()">☰</div>
+
+<div class="titulo">ACASHOTS</div>
+
+<img src="imagenes/ACASHOTS.jpeg" class="logo">
+
+</header>
+
+<div class="contenido">
+
+<div class="texto">
+
+<h1>BIENVENIDO</h1>
+
+<p><b>ACASHOTS</b></p>
+<p>Tu evento, nuestro bar 🍹</p>
+
+<p>
+El Contexto de la Empresa es fundamental para comprender el entorno en el que opera una organización. Este abarca diversos elementos que influyen en su funcionamiento, estrategia y desarrollo. Entender este contexto permite a los emprendedores y gestores tomar decisiones informadas, adaptarse a los cambios del mercado y aprovechar las oportunidades existentes. La relación entre la cultura empresarial, las técnicas de desarrollo, la misión y visión, entre otros aspectos, conforman un marco que guía el crecimiento y la sostenibilidad de la empresa.
+</p>
+
+</div>
+
+<div class="imagen">
+<img src="imagenes/COCTEL.jpeg">
+</div>
+
+</div>
+
+<footer id="contacto">
+Contáctanos: 7443748363
+</footer>
+
+<script>
+
+function abrirMenu(){
+document.getElementById("menu").classList.add("abierto");
+}
+
+function cerrarMenu(){
+document.getElementById("menu").classList.remove("abierto");
+}
+
+</script>
+
+</body>
+</html>
