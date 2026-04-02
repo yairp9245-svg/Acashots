@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trabajos en Clase</title><style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#f4f4f4;
+}
+
+/* HEADER */
+
+header{
+background:#0f172a;
+color:white;
+padding:20px;
+position:relative;
+text-align:center;
+}
+
+.titulo{
+font-size:28px;
+font-weight:bold;
+}
+
+/* BOTON MENU */
+
+.menu-btn{
+position:absolute;
+left:20px;
+top:50%;
+transform:translateY(-50%);
+font-size:30px;
+cursor:pointer;
+}
+
+/* Boton */
+.boton{
+display:inline-block;
+margin-top:20px;
+padding:10px 20px;
+background:#2563eb;
+color:white;
+text-decoration:none;
+border-radius:6px;
+}
+
+/* MENU LATERAL */
+
+.menu{
+position:fixed;
+left:-230px;
+top:0;
+width:230px;
+height:100%;
+background:#111827;
+transition:0.3s;
+padding-top:20px;
+}
+
+.menu.abierto{
+left:0;
+}
+
+/* BOTON CERRAR */
+
+.cerrar{
+color:white;
+font-size:25px;
+cursor:pointer;
+margin-left:180px;
+margin-bottom:20px;
+}
+
+/* LINKS MENU */
+
+.menu a{
+display:block;
+color:white;
+padding:15px 20px;
+text-decoration:none;
+font-size:18px;
+}
+
+.menu a:hover{
+background:#374151;
+}
+
+/* CONTENEDOR TARJETAS */
+
+.contenedor{
+display:flex;
+justify-content:center;
+gap:40px;
+padding:60px;
+flex-wrap:wrap;
+}
+
+/* TARJETAS */
+
+.tarjeta{
+background:white;
+width:280px;
+padding:20px;
+border-radius:12px;
+box-shadow:0px 5px 15px rgba(0,0,0,0.2);
+text-align:center;
+transition:0.3s;
+}
+
+.tarjeta:hover{
+transform:translateY(-5px);
+}
+
+/* TITULO TARJETA */
+
+.tarjeta h3{
+margin-bottom:15px;
+}
+
+/* IMAGEN */
+
+.imagen{
+width:100%;
+border-radius:10px;
+border:2px solid #ddd;
+padding:5px;
+}
+
+.imagen img{
+width:100%;
+height:auto;
+border-radius:8px;
+}
+
+</style></head><body><!-- MENU --><div id="menu" class="menu"><div class="cerrar" onclick="cerrarMenu()">✖</div><a href="../../index.html">Inicio</a>
+<a href="../Login/LoginU.html">Unidades</a>
+<a href="#">Contacto</a>
+
+</div><!-- HEADER --><header><div class="menu-btn" onclick="abrirMenu()">☰</div><div class="titulo">Trabajos en Clase</div></header><!-- TARJETAS --><div class="contenedor"><div class="tarjeta">
+<h3>EXAMEN DE LA UNIDAD 1 Y 2</h3>
+<div class="imagen">
+<img src="../../imagenes/EXAMENCRIS.jpeg">
+<img src="../../imagenes/EXAMENCARLOS.jpeg">
+</div>
+
+
+<a class="boton" href="../Login/LoginEvi.html">Volver a Evidencias</a>
+
+<script>
+
+function abrirMenu(){
+document.getElementById("menu").classList.add("abierto");
+}
+
+function cerrarMenu(){
+document.getElementById("menu").classList.remove("abierto");
+}
+
+</script></body>
+</html>
