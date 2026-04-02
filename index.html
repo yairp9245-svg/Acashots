@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ACASHOTS</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:#f4f4f4;
+}
+
+/* HEADER */
+
+header{
+display:flex;
+align-items:center;
+justify-content:space-between;
+background:#0f172a;
+color:white;
+padding:15px 30px;
+}
+
+.titulo{
+font-size:28px;
+font-weight:bold;
+letter-spacing:2px;
+}
+
+.logo{
+width:90px;
+border-radius:10px;
+}
+
+.menu-btn{
+font-size:28px;
+cursor:pointer;
+}
+
+/* MENU */
+
+.menu{
+position:fixed;
+left:-230px;
+top:0;
+width:230px;
+height:100%;
+background:#111827;
+transition:0.3s;
+padding-top:20px;
+}
+
+.menu.abierto{
+left:0;
+}
+
+.cerrar{
+color:white;
+font-size:25px;
+cursor:pointer;
+margin-left:180px;
+margin-bottom:20px;
+}
+
+.menu a{
+display:block;
+color:white;
+padding:15px 20px;
+text-decoration:none;
+font-size:18px;
+}
+
+.menu a:hover{
+background:#374151;
+}
+
+/* CONTENIDO PRINCIPAL */
+
+.contenido{
+display:flex;
+align-items:center;
+justify-content:space-around;
+padding:90px 60px;
+flex-wrap:wrap;
+gap:50px;
+background:white;
+}
+
+.texto{
+max-width:520px;
+}
+
+.texto h1{
+font-size:42px;
+margin-bottom:10px;
+}
+
+.texto p{
+font-size:18px;
+color:#444;
+line-height:1.6;
+}
+
+/* IMAGEN */
+
+.imagen{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0px 8px 20px rgba(0,0,0,0.15);
+}
+
+.imagen img{
+width:100%;
+max-width:340px;
+border-radius:10px;
+}
+
+/* SECCION INFORMACION */
+
+.info{
+padding:80px 40px;
+background:#f9fafb;
+}
+
+.titulo-info{
+text-align:center;
+font-size:34px;
+margin-bottom:60px;
+color:#0f172a;
+letter-spacing:1px;
+}
+
+/* CONTENEDOR CUADROS */
+
+.cuadros{
+display:flex;
+justify-content:center;
+gap:40px;
+flex-wrap:wrap;
+max-width:1200px;
+margin:auto;
+}
+
+/* CUADROS */
+
+.cuadro{
+background:white;
+width:240px;
+padding:30px 25px;
+border-radius:12px;
+box-shadow:0 6px 18px rgba(0,0,0,0.08);
+text-align:center;
+transition:0.3s;
+border-top:4px solid #0f172a;
+}
+
+.cuadro:hover{
+transform:translateY(-8px);
+box-shadow:0 12px 25px rgba(0,0,0,0.18);
+}
+
+.cuadro h3{
+margin-bottom:15px;
+color:#0f172a;
+font-size:22px;
+}
+
+.cuadro p{
+font-size:16px;
+color:#555;
+line-height:1.5;
+}
+
+/* FOOTER */
+
+footer{
+background:#0f172a;
+color:white;
+text-align:center;
+padding:25px;
+margin-top:60px;
+font-size:14px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width:768px){
+
+header{
+padding:15px;
+}
+
+.titulo{
+font-size:22px;
+}
+
+.logo{
+width:70px;
+}
+
+.contenido{
+flex-direction:column;
+padding:50px 25px;
+text-align:center;
+}
+
+.texto h1{
+font-size:32px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="menu" class="menu">
+
+<div class="cerrar" onclick="cerrarMenu()">✖</div>
+
+<a href="index.html">Inicio</a>
+<a href="UNIDADES/Login/LoginU.html">Unidades</a>
+<a href="#contacto">Contacto</a>
+<a href="SERVICIO/SERVI.html">Nuestro servicio</a>
+
+</div>
+
+<header>
+
+<div class="menu-btn" onclick="abrirMenu()">☰</div>
+
+<div class="titulo">ACASHOTS</div>
+
+<img src="imagenes/ACASHOTS.jpeg" class="logo">
+
+</header>
+
+<div class="contenido">
+
+<div class="texto">
+
+<h1>BIENVENIDO</h1>
+
+<p><b>ACASHOTS</b></p>
+<p>Tu evento, nuestro bar 🍹</p>
+
+<p>
+El mercado de servicios para eventos ha experimentado un crecimiento significativo en los últimos años, especialmente en el sector de bebidas y entretenimiento. ACASHOTS busca ofrecer una experiencia única mediante un servicio de bar móvil profesional para todo tipo de eventos.
+</p>
+
+</div>
+
+<div class="imagen">
+<img src="imagenes/COCTEL.jpeg">
+</div>
+
+</div>
+
+<!-- SECCION INFORMACION -->
+
+<section class="info">
+
+<h2 class="titulo-info">Nuestra Empresa</h2>
+
+<div class="cuadros">
+
+<div class="cuadro">
+<h3>Misión</h3>
+<p>
+Brindar un servicio de bar móvil profesional que ofrezca experiencias únicas en cada evento, garantizando calidad, atención y bebidas de excelente sabor.
+</p>
+</div>
+
+<div class="cuadro">
+<h3>Visión</h3>
+<p>
+Convertirnos en una empresa reconocida en el sector de eventos por nuestra innovación, calidad de servicio y la satisfacción de nuestros clientes.
+</p>
+</div>
+
+<div class="cuadro">
+<h3>Valores</h3>
+<p>
+Responsabilidad, compromiso, calidad, creatividad y trabajo en equipo para ofrecer siempre el mejor servicio.
+</p>
+</div>
+
+<div class="cuadro">
+<h3>Alcance</h3>
+<p>
+Ofrecer nuestros servicios en diferentes tipos de eventos sociales y empresariales, adaptándonos a las necesidades de cada cliente.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<footer id="contacto">
+Contáctanos: 7443748363 / 7445859510  
+<br>
+Carlos Yair Hernández Pérez / Ana Cristal Garcia Benitez
+</footer>
+
+<script>
+
+function abrirMenu(){
+document.getElementById("menu").classList.add("abierto");
+}
+
+function cerrarMenu(){
+document.getElementById("menu").classList.remove("abierto");
+}
+
+</script>
+
+</body>
+</html>
