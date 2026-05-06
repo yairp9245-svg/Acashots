@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Punto de Equilibrio</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            margin: 0;
+            padding: 20px;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .botones {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: #00c6ff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #0072ff;
+        }
+
+        #resultado {
+            margin: 25px 0;
+            font-size: 24px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 25px;
+            border-collapse: collapse;
+            background: white;
+            color: black;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background: #0072ff;
+            color: white;
+        }
+
+        canvas {
+            margin-top: 40px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Calculadora de Punto de Equilibrio</h1>
+
+    <input type="number" id="costosFijos" placeholder="Costos Fijos">
+    <input type="number" id="precioVenta" placeholder="Precio de Venta">
+    <input type="number" id="costoVariable" placeholder="Costo Variable">
+
+    <div class="botones">
+        <button onclick="calcular()">Calcular</button>
+        <button onclick="graficar()">Graficar</button>
+    </div>
+
+    <div id="resultado"></div>
+
+    <table id="tabla">
+        <thead>
+            <tr>
+                <th>Cantidad</th>
+                <th>Ingresos</th>
+                <th>Costos</th>
+                <th>Utilidad</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <canvas id="grafica"></canvas>
+</div>
+
+<script>
+    let chart = null;
+
+    function obtenerDatos() {
+        return {
+            cf: parseFloat(document.getElementById('costosFijos').value),
+            precio: parseFloat(document.getElementById('precioVenta').value),
+            cv: parseFloat(document.getElementById('costoVariable').value)
+        };
+    }
+
+    function calcular() {
+        const { cf, precio, cv } = obtenerDatos();
+
+        if (isNaN(cf) || isNaN(precio) || isNaN(cv)) {
+            alert("Ingrese todos los datos.");
+            return;
+        }
+
+        if (precio <= cv) {
+            document.getElementById('resultado').innerHTML =
+                "Error: El precio debe ser mayor al costo variable.";
+            return;
+        }
+
+        const puntoEquilibrio = cf / (precio - cv);
+
+        document.getElementById('resultado').innerHTML =
+            `Punto de Equilibrio: ${puntoEquilibrio.toFixed(2)} unidades`;
+
+        const tbody = document.querySelector('#tabla tbody');
+        tbody.innerHTML = "";
+
+        for (let x = 0; x <= puntoEquilibrio * 2; x += Math.max(1, puntoEquilibrio / 10)) {
+            const ingresos = precio * x;
+            const costos = cf + cv * x;
+            const utilidad = ingresos - costos;
+
+            let estado = "EQUILIBRIO";
+            if (utilidad > 0) estado = "GANANCIA";
+            if (utilidad < 0) estado = "PÉRDIDA";
+
+            tbody.innerHTML += `
+                <tr>
+                    <td>${x.toFixed(2)}</td>
+                    <td>$${ingresos.toFixed(2)}</td>
+                    <td>$${costos.toFixed(2)}</td>
+                    <td>$${utilidad.toFixed(2)}</td>
+                    <td>${estado}</td>
+                </tr>
+            `;
+        }
+    }
+
+    function graficar() {
+        const { cf, precio, cv } = obtenerDatos();
+
+        if (isNaN(cf) || isNaN(precio) || isNaN(cv)) {
+            alert("Ingrese todos los datos.");
+            return;
+        }
+
+        if (precio <= cv) {
+            alert("El precio debe ser mayor al costo variable.");
+            return;
+        }
+
+        const puntoEquilibrio = cf / (precio - cv);
+
+        const labels = [];
+        const ingresos = [];
+        const costos = [];
+        const costosFijos = [];
+
+        const limite = puntoEquilibrio * 2;
+
+        for (let i = 0; i <= limite; i += limite / 50) {
+            labels.push(i.toFixed(2));
+            ingresos.push(precio * i);
+            costos.push(cf + cv * i);
+            costosFijos.push(cf);
+        }
+
+        const ctx = document.getElementById('grafica').getContext('2d');
+
+        if (chart) {
+            chart.destroy();
+        }
+
+        const pluginSombreado = {
+            id: 'zonasEquilibrio',
+            beforeDraw(chart) {
+                const { ctx, chartArea, scales } = chart;
+                const xEq = scales.x.getPixelForValue(puntoEquilibrio.toFixed(2));
+
+                ctx.save();
+
+                // Zona de pérdidas
+                ctx.fillStyle = 'rgba(255, 0, 0, 0.15)';
+                ctx.fillRect(
+                    chartArea.left,
+                    chartArea.top,
+                    xEq - chartArea.left,
+                    chartArea.bottom - chartArea.top
+                );
+
+                // Zona de ganancias
+                ctx.fillStyle = 'rgba(0, 255, 0, 0.15)';
+                ctx.fillRect(
+                    xEq,
+                    chartArea.top,
+                    chartArea.right - xEq,
+                    chartArea.bottom - chartArea.top
+                );
+
+                ctx.restore();
+            }
+        };
+
+        chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Ingresos',
+                        data: ingresos,
+                        borderWidth: 3,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'Costos Totales',
+                        data: costos,
+                        borderWidth: 3,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'Costo Fijo',
+                        data: costosFijos,
+                        borderDash: [10, 5],
+                        borderWidth: 2,
+                        tension: 0
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                interaction: {
+                    mode: 'index',
+                    intersect: false
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Gráfica del Punto de Equilibrio'
+                    },
+                    legend: {
+                        display: true
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Cantidad'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Dinero'
+                        }
+                    }
+                }
+            },
+            plugins: [pluginSombreado]
+        });
+    }
+</script>
+
+</body>
+</html>
