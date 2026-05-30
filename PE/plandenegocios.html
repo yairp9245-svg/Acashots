@@ -1,0 +1,402 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan de Negocios</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#f4f4f4;
+}
+
+header{
+    background:#0f172a;
+    color:white;
+    padding:20px;
+    position:relative;
+    text-align:center;
+}
+
+.titulo{
+    font-size:28px;
+    font-weight:bold;
+}
+
+.menu-btn{
+    position:absolute;
+    left:20px;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:30px;
+    cursor:pointer;
+}
+
+.boton{
+    display:inline-block;
+    padding:10px 20px;
+    background:#111827;
+    color:white;
+    text-decoration:none;
+    border-radius:6px;
+}
+
+.menu{
+    position:fixed;
+    left:-230px;
+    top:0;
+    width:230px;
+    height:100%;
+    background:#111827;
+    transition:.3s;
+    padding-top:20px;
+}
+
+.menu.abierto{
+    left:0;
+}
+
+.cerrar{
+    color:white;
+    font-size:25px;
+    cursor:pointer;
+    margin-left:180px;
+    margin-bottom:20px;
+}
+
+.menu a{
+    display:block;
+    color:white;
+    padding:15px 20px;
+    text-decoration:none;
+    font-size:18px;
+}
+
+.menu a:hover{
+    background:#374151;
+}
+
+.contenedor{
+    display:flex;
+    justify-content:center;
+    gap:40px;
+    padding:60px;
+    flex-wrap:wrap;
+}
+
+.tarjeta{
+    background:white;
+    width:280px;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+    text-align:center;
+}
+
+.imagen{
+    width:100%;
+    border-radius:10px;
+    border:2px solid #ddd;
+    padding:5px;
+}
+
+.imagen img{
+    width:100%;
+    border-radius:8px;
+}
+
+.container{
+    max-width:1000px;
+    margin:40px auto;
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+
+h1{
+    text-align:center;
+    color:#0f172a;
+}
+
+.menu-financiero{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+}
+
+.menu-financiero button,
+button{
+    padding:10px 20px;
+    background:#0f172a;
+    color:white;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.seccion{
+    display:none;
+    margin-top:20px;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    border:1px solid #ccc;
+    border-radius:6px;
+    box-sizing:border-box;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
+
+th,td{
+    border:1px solid #ddd;
+    padding:10px;
+    text-align:center;
+}
+
+th{
+    background:#0f172a;
+    color:white;
+}
+
+.resultado{
+    margin-top:15px;
+    padding:15px;
+    background:#f8f8f8;
+    border-radius:8px;
+}
+
+.footer-boton{
+    text-align:center;
+    margin:50px 0;
+}
+</style>
+</head>
+
+<body>
+
+<div id="menu" class="menu">
+    <div class="cerrar" onclick="cerrarMenu()">✖</div>
+    <a href="../index.html">Inicio</a>
+</div>
+
+<header>
+    <div class="menu-btn" onclick="abrirMenu()">☰</div>
+    <div class="titulo">PLAN DE NEGOCIOS</div>
+</header>
+
+<!-- TARJETAS -->
+<div class="contenedor">
+
+    <div class="tarjeta">
+        <h3>BALANCE GENERAL</h3>
+        <div class="imagen">
+            <img src="../imagenes/BG.jpeg">
+        </div>
+    </div>
+
+    <div class="tarjeta">
+        <h3>ESTADO DE RESULTADOS</h3>
+        <div class="imagen">
+            <img src="../imagenes/ER.jpeg">
+        </div>
+    </div>
+
+    <div class="tarjeta">
+        <h3>FLUJO DE EFECTIVO</h3>
+        <div class="imagen">
+            <img src="../imagenes/FE.jpeg">
+        </div>
+    </div>
+
+    <div class="tarjeta">
+        <h3>ESTADO DE RESULTADOS DEL EXAMEN</h3>
+        <div class="imagen">
+            <img src="../imagenes/ER2.jpeg">
+        </div>
+    </div>
+
+    <div class="tarjeta">
+        <h3>BALANCE GENERAL DEL EXAMEN</h3>
+        <div class="imagen">
+            <img src="../imagenes/BG2.jpeg">
+        </div>
+    </div>
+
+    <div class="tarjeta">
+        <h3>FLUJO DE EFECTIVO DEL EXAMEN</h3>
+        <div class="imagen">
+            <img src="../imagenes/FE2.jpeg">
+        </div>
+    </div>
+
+</div>
+
+<!-- SISTEMA FINANCIERO -->
+<div class="container">
+
+<h1>SISTEMA FINANCIERO</h1>
+
+<div class="menu-financiero">
+    <button onclick="mostrar('flujo')">Flujo de Efectivo</button>
+    <button onclick="mostrar('balance')">Balance General</button>
+    <button onclick="mostrar('estado')">Estado de Resultados</button>
+</div>
+
+<div id="flujo" class="seccion">
+    <h2>Flujo de Efectivo</h2>
+    <input type="number" id="mp" placeholder="Materia Prima">
+    <input type="number" id="mo" placeholder="Mano de Obra">
+    <input type="number" id="ci" placeholder="Costos Indirectos">
+    <input type="number" id="pv" placeholder="Precio de Venta">
+    <button onclick="calcularFlujo()">Calcular</button>
+    <div id="resultadoFlujo"></div>
+</div>
+
+<div id="balance" class="seccion">
+    <h2>Balance General</h2>
+    <input type="number" id="efectivo" placeholder="Efectivo y Bancos">
+    <input type="number" id="clientes" placeholder="Cuentas por Cobrar">
+    <input type="number" id="inventarios" placeholder="Inventarios">
+    <input type="number" id="seguros" placeholder="Seguros Anticipados">
+    <input type="number" id="otrosActivos" placeholder="Otros Activos Diferidos">
+    <input type="number" id="mobiliario" placeholder="Mobiliario y Equipo">
+    <input type="number" id="depreciacion" placeholder="Depreciación Acumulada">
+    <input type="number" id="proveedores" placeholder="Proveedores">
+    <input type="number" id="creditos" placeholder="Créditos Bancarios">
+    <input type="number" id="otrosPasivos" placeholder="Otros Pasivos Diferidos">
+    <input type="number" id="capital" placeholder="Capital Social">
+
+    <button onclick="calcularBalance()">Calcular</button>
+    <div id="resultadoBalance"></div>
+</div>
+
+<div id="estado" class="seccion">
+    <h2>Estado de Resultados</h2>
+    <input type="number" id="ventas" placeholder="Ventas">
+    <input type="number" id="costoVentas" placeholder="Costo de Ventas">
+    <input type="number" id="productosFinancieros" placeholder="Productos Financieros">
+    <input type="number" id="gastosAdmin" placeholder="Gastos Administración">
+    <input type="number" id="gastosVentas" placeholder="Gastos Ventas">
+
+    <button onclick="calcularEstado()">Calcular</button>
+    <div id="resultadoEstado"></div>
+</div>
+
+</div>
+
+<!-- BOTÓN FINAL -->
+<div class="footer-boton">
+    <a class="boton" href="../index.html">Volver a INICIO</a>
+</div>
+
+<script>
+
+function abrirMenu(){
+    document.getElementById("menu").classList.add("abierto");
+}
+
+function cerrarMenu(){
+    document.getElementById("menu").classList.remove("abierto");
+}
+
+function mostrar(id){
+    document.querySelectorAll('.seccion').forEach(s=>{
+        s.style.display='none';
+    });
+
+    document.getElementById(id).style.display='block';
+}
+
+function calcularFlujo(){
+
+    let mp=+document.getElementById('mp').value||0;
+    let mo=+document.getElementById('mo').value||0;
+    let ci=+document.getElementById('ci').value||0;
+    let pv=+document.getElementById('pv').value||0;
+
+    let meses=["Ene","Feb","Mar","Abr","May","Jun"];
+    let prod=[mp+mo+ci];
+
+    for(let i=1;i<6;i++){
+        prod[i]=prod[i-1]+5000;
+    }
+
+    let html="<table><tr><th>Mes</th><th>Producción</th><th>Ventas</th><th>Entradas</th></tr>";
+
+    for(let i=0;i<6;i++){
+        let v=prod[i]*pv;
+        html+=`<tr>
+        <td>${meses[i]}</td>
+        <td>${prod[i].toFixed(2)}</td>
+        <td>${v.toFixed(2)}</td>
+        <td>${v.toFixed(2)}</td>
+        </tr>`;
+    }
+
+    html+="</table>";
+
+    document.getElementById("resultadoFlujo").innerHTML=html;
+}
+
+function calcularBalance(){
+
+    let efectivo=+document.getElementById('efectivo').value||0;
+    let clientes=+document.getElementById('clientes').value||0;
+    let inventarios=+document.getElementById('inventarios').value||0;
+    let seguros=+document.getElementById('seguros').value||0;
+    let otrosActivos=+document.getElementById('otrosActivos').value||0;
+    let mobiliario=+document.getElementById('mobiliario').value||0;
+    let depreciacion=+document.getElementById('depreciacion').value||0;
+
+    let proveedores=+document.getElementById('proveedores').value||0;
+    let creditos=+document.getElementById('creditos').value||0;
+    let otrosPasivos=+document.getElementById('otrosPasivos').value||0;
+    let capital=+document.getElementById('capital').value||0;
+
+    let totalActivos=efectivo+clientes+inventarios+seguros+otrosActivos+mobiliario+depreciacion;
+    let totalPasivos=proveedores+creditos+otrosPasivos;
+    let capitalContable=totalActivos-(capital+totalPasivos);
+
+    document.getElementById("resultadoBalance").innerHTML=`
+    <div class="resultado">
+        <p><b>Total Activos:</b> $${totalActivos.toFixed(2)}</p>
+        <p><b>Total Pasivos:</b> $${totalPasivos.toFixed(2)}</p>
+        <p><b>Capital Contable:</b> $${capitalContable.toFixed(2)}</p>
+    </div>`;
+}
+
+function calcularEstado(){
+
+    let ventas=+document.getElementById('ventas').value||0;
+    let costo=+document.getElementById('costoVentas').value||0;
+    let pf=+document.getElementById('productosFinancieros').value||0;
+    let ga=+document.getElementById('gastosAdmin').value||0;
+    let gv=+document.getElementById('gastosVentas').value||0;
+
+    let utilidadBruta=ventas-costo;
+    let utilidadNeta=(utilidadBruta+pf)-ga-gv;
+
+    document.getElementById("resultadoEstado").innerHTML=`
+    <div class="resultado">
+        <p><b>Utilidad Bruta:</b> $${utilidadBruta.toFixed(2)}</p>
+        <h2>Utilidad Neta: $${utilidadNeta.toFixed(2)}</h2>
+    </div>`;
+}
+
+</script>
+
+</body>
+</html>
