@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sensor de Nivel de Agua</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:'Inter',sans-serif;
+background:#f4f4f4;
+}
+
+/* HEADER */
+
+header{
+display:flex;
+align-items:center;
+justify-content:space-between;
+background:#0f172a;
+color:white;
+padding:15px 40px;
+position:sticky;
+top:0;
+z-index:100;
+}
+
+.titulo{
+font-size:26px;
+font-weight:800;
+letter-spacing:2px;
+}
+
+.logo{
+width:80px;
+border-radius:10px;
+}
+
+.menu-btn{
+font-size:28px;
+cursor:pointer;
+}
+
+/* MENU */
+
+.menu{
+position:fixed;
+left:-260px;
+top:0;
+width:260px;
+height:100%;
+background:#0f172a;
+transition:0.4s;
+padding-top:20px;
+z-index:200;
+box-shadow:5px 0 20px rgba(0,0,0,0.4);
+}
+
+.menu.abierto{
+left:0;
+}
+
+.menu a{
+display:block;
+color:white;
+padding:18px 25px;
+text-decoration:none;
+transition:0.3s;
+}
+
+.menu a:hover{
+background:#1e293b;
+}
+
+.cerrar{
+color:white;
+font-size:25px;
+cursor:pointer;
+text-align:right;
+padding:10px 20px;
+}
+
+/* HERO */
+
+.hero{
+background:linear-gradient(135deg,#0f172a,#1e293b);
+color:white;
+padding:120px 60px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+flex-wrap:wrap;
+gap:50px;
+}
+
+.texto{
+max-width:520px;
+}
+
+.texto h1{
+font-size:52px;
+margin-bottom:15px;
+}
+
+.texto p{
+font-size:18px;
+color:#cbd5e1;
+line-height:1.7;
+}
+
+/* BOTON */
+
+.boton{
+display:inline-block;
+margin-top:25px;
+padding:14px 30px;
+background:white;
+color:#0f172a;
+border-radius:30px;
+text-decoration:none;
+font-weight:600;
+transition:0.3s;
+}
+
+.boton:hover{
+transform:scale(1.08);
+}
+
+/* IMAGEN HERO */
+
+.imagen img{
+width:100%;
+max-width:360px;
+border-radius:15px;
+box-shadow:0 20px 40px rgba(0,0,0,0.4);
+animation:flotar 3s ease-in-out infinite;
+}
+
+/* ANIMACION */
+
+@keyframes flotar{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-15px);}
+}
+
+/* INFO */
+
+.info{
+padding:100px 40px;
+background:#f9fafb;
+}
+
+.titulo-info{
+text-align:center;
+font-size:36px;
+margin-bottom:70px;
+color:#0f172a;
+}
+
+/* CARDS */
+
+.cuadros{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+max-width:1100px;
+margin:auto;
+}
+
+.cuadro{
+background:white;
+padding:35px;
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,0.1);
+transition:0.3s;
+}
+
+.cuadro:hover{
+transform:translateY(-12px) scale(1.02);
+}
+
+.cuadro h3{
+color:#0f172a;
+margin-bottom:15px;
+}
+
+.cuadro p{
+color:#555;
+line-height:1.6;
+}
+
+/* GALERIA */
+
+.galeria{
+padding:80px 20px;
+text-align:center;
+background:white;
+}
+
+.galeria h2{
+font-size:36px;
+margin-bottom:40px;
+color:#0f172a;
+}
+
+.imagenes{
+display:flex;
+justify-content:center;
+gap:30px;
+flex-wrap:wrap;
+}
+
+.imagenes img{
+width:100%;
+max-width:300px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+transition:0.3s;
+}
+
+.imagenes img:hover{
+transform:scale(1.05);
+}
+
+/* FOOTER */
+
+footer{
+background:#0f172a;
+color:white;
+text-align:center;
+padding:30px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width:768px){
+
+.hero{
+flex-direction:column;
+text-align:center;
+padding:80px 20px;
+}
+
+.texto h1{
+font-size:36px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- MENU -->
+<div id="menu" class="menu">
+
+<div class="cerrar" onclick="cerrarMenu()">✖</div>
+
+<a href="../index.html">Inicio</a>
+<a href="#materiales">Materiales</a>
+<a href="#proceso">Proceso</a>
+<a href="#conclusion">Conclusión</a>
+
+</div>
+
+<!-- HEADER -->
+<header>
+
+<div class="menu-btn" onclick="abrirMenu()">☰</div>
+
+<div class="titulo">
+SENSOR DE AGUA
+</div>
+
+<img src="../imagenes/ACASHOTS.jpeg" class="logo">
+
+</header>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+
+<div class="texto">
+
+<h1>Sensor de Nivel de Agua 💧</h1>
+
+<p>
+Proyecto basado en un sistema conductivo capaz de detectar visualmente el nivel del agua utilizando LEDs, resistencias y principios básicos de electrónica.
+</p>
+
+<a href="#materiales" class="boton">
+Ver Proyecto
+</a>
+
+</div>
+
+<div class="imagen">
+<img src="../imagenes/S1.jpeg">
+</div>
+
+</section>
+
+<!-- INFORMACION -->
+<section class="info" id="materiales">
+
+<h2 class="titulo-info">
+Materiales Utilizados
+</h2>
+
+<div class="cuadros">
+
+<div class="cuadro">
+<h3>LEDs</h3>
+<p>
+Funcionan como indicadores visuales para representar los niveles de agua.
+</p>
+</div>
+
+<div class="cuadro">
+<h3>Resistencias</h3>
+<p>
+Limitan la corriente eléctrica y protegen los componentes electrónicos.
+</p>
+</div>
+
+<div class="cuadro">
+<h3>Cables Macho</h3>
+<p>
+Se utilizan como sondas sensoras y conexiones dentro del protoboard.
+</p>
+</div>
+
+<div class="cuadro">
+<h3>Batería de 9V</h3>
+<p>
+Fuente principal de alimentación del circuito electrónico.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- PROCESO -->
+<section class="info" id="proceso">
+
+<h2 class="titulo-info">
+Proceso de Elaboración
+</h2>
+
+<div class="cuadros">
+
+<div class="cuadro">
+<h3>1. Instalación de Sondas</h3>
+<p>
+Se fijan los cables macho a distintas alturas dentro del vaso. El cable común debe estar siempre en el punto más bajo.
+</p>
+</div>
+
+<div class="cuadro">
+<h3>2. Configuración del Circuito</h3>
+<p>
+ Se conecta cada cable de nivel a una resistencia, y esta al ánodo (pata larga) de un LED.
+</p>
+</div>
+
+<div class="cuadro">
+<h3>3. Retorno de Tierra</h3>
+<p>
+Todos los cátodos (patas cortas) de los LEDs se conectan al polo negativo (GND) de la fuente de poder.
+</p>
+</div>
+
+<div class="cuadro">
+<h3>Ley de Ohm</h3>
+
+<p>
+El proyecto aplica la Ley de Ohm para controlar el flujo de corriente eléctrica.
+</p>
+
+<p style="font-weight:bold; font-size:22px;">
+V = I / R
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- GALERIA -->
+<section class="galeria">
+
+<h2>
+Galería del Proyecto
+</h2>
+
+<div class="imagenes">
+
+<img src="../imagenes/S2.jpeg">
+
+<img src="../imagenes/S3.jpeg">
+
+<img src="../imagenes/S4.jpeg">
+
+<img src="../imagenes/S5.jpeg">
+
+</div>
+
+</section>
+
+<!-- CONCLUSION -->
+<section class="info" id="conclusion">
+
+<h2 class="titulo-info">
+Conclusión
+</h2>
+
+<div class="cuadros">
+
+<div class="cuadro">
+<p>
+Este dispositivo demuestra que el agua puede integrarse como un componente activo en un sistema electrónico.
+</p>
+</div>
+
+<div class="cuadro">
+<p>
+ Además de ser útil para depósitos domésticos o industriales, sirve como modelo educativo para entender la conductividad y el control de magnitudes eléctricas fundamentales.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+
+Sensor de Nivel de Agua  
+
+</footer>
+
+<!-- SCRIPT -->
+<script>
+
+function abrirMenu(){
+document.getElementById("menu").classList.add("abierto");
+}
+
+function cerrarMenu(){
+document.getElementById("menu").classList.remove("abierto");
+}
+
+</script>
+
+</body>
+</html>
